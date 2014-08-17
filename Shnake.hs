@@ -138,10 +138,10 @@ maybeCreateCherry world =
 createCherryAtRandomPosition :: World -> World
 createCherryAtRandomPosition = execState place
     where place = do randPos <- getRandomPosition
-                     modify (makeCherry randPos)
+                     modify (addCherry randPos)
 
-makeCherry :: Pos -> World -> World
-makeCherry pos world = world { cherry = Just pos }
+addCherry :: Pos -> World -> World
+addCherry pos world = world { cherry = Just pos }
 
 getRandomPosition :: State World Pos
 getRandomPosition = do rx <- getRand (0, boardSize)

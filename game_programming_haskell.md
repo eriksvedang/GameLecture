@@ -248,21 +248,17 @@ maybeCreateCherry world =
 # Randomness!
 ```haskell
 createCherryAtRandomPosition :: World -> World
-createCherryAtRandomPosition world = world' { cherry = Just randPos }
-    where (randPos, world') = getRandomPosition world
+createCherryAtRandomPosition = execState place
+    where place = do randPos <- getRandomPosition
+                     modify (addCherry randPos)
 
-getRandomPosition :: World -> ((Int,Int), World)
-getRandomPosition = runState $ do rx <- getRand (0, boardSize)
-                                  ry <- getRand (0, boardSize)
-                                  return (rx,ry)
+addCherry :: Pos -> World -> World
+addCherry pos world = world { cherry = Just pos }
 
-getRand :: (Int, Int) -> State World Int
-getRand range = 
-    do world <- get
-       let g = randg world
-           (r, g') = randomR range g
-       put world { randg = g' }
-       return r
+getRandomPosition :: State World Pos
+getRandomPosition = do rx <- getRand (0, boardSize)
+                       ry <- getRand (0, boardSize)
+                       return (rx,ry)
 ```
 
 ---
