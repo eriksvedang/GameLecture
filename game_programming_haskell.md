@@ -350,7 +350,7 @@ drawDot dot = translateUsingPoint (dot^.pos)
 
 ---
 
-# John Carmack, state of the union 2013 (youtube)
+# John Carmack's keynote at Quakecon 2013 part 4
 
 ---
 
