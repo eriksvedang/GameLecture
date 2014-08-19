@@ -294,7 +294,7 @@ restart world = makeWorld (randg world)
 
 ---
 
-# Lots of boilerplate
+# Lots of boilerplate...
 ```haskell
 data Dot = Dot {
     _pos :: Point,
@@ -320,7 +320,13 @@ flipColor = over col invertColor
 
 # True happiness
 ```haskell
-onEvent (EventKey (SpecialKey KeySpace) Down _ _) world = over dots (map flipColor) world
+onEvent (EventKey (SpecialKey KeySpace) Down _ _) world = 
+    over dots (map flipColor) world
+
+drawDot :: Dot -> Picture
+drawDot dot = translateUsingPoint (dot^.pos) 
+            $ color (dot^.col) 
+            $ circleSolid (dot^.rad)
 ```
 
 ---
@@ -344,5 +350,10 @@ onEvent (EventKey (SpecialKey KeySpace) Down _ _) world = over dots (map flipCol
 
 ---
 
+# John Carmack, state of the union 2013 (youtube)
+
+---
+
 # https://github.com/eriksvedang/GameLecture
 
+---
