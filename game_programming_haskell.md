@@ -294,6 +294,37 @@ restart world = makeWorld (randg world)
 
 ---
 
+# Lots of boilerplate
+```haskell
+data Dot = Dot {
+    _pos :: Point,
+    _col :: Color,
+    _rad :: Float
+}
+
+flipColor :: Dot -> Dot
+flipColor dot = dot { _col = invertColor (_col dot) }
+```
+
+---
+
+# Lens!
+```haskell
+makeLenses ''Dot
+
+flipColor :: Dot -> Dot
+flipColor = over col invertColor
+```
+
+---
+
+# True happiness
+```haskell
+onEvent (EventKey (SpecialKey KeySpace) Down _ _) world = over dots (map flipColor) world
+```
+
+---
+
 # Quil vs Gloss
 
 - bugs, correctness
@@ -310,3 +341,8 @@ restart world = makeWorld (randg world)
 ---
 
 # #haskell-game
+
+---
+
+# https://github.com/eriksvedang/GameLecture
+

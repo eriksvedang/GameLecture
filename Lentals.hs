@@ -42,6 +42,7 @@ translateUsingPoint (x,y) = translate x y
 
 onEvent :: Event -> World -> World
 onEvent (EventKey (MouseButton LeftButton) Down _ mousePos) world = execState (makeDot mousePos) world
+onEvent (EventKey (SpecialKey KeySpace) _ _ _) world = over dots (map flipColor) world
 onEvent _ world = world
 
 makeDot :: Point -> State World ()
@@ -53,6 +54,19 @@ makeDot mousePos = do
 
 addDot :: Color -> Point -> Float -> [Dot] -> [Dot]
 addDot c p r ds = Dot { _pos = p, _col = c, _rad = r } : ds
+
+flipColor :: Dot -> Dot
+flipColor = over col invertColor
+
+flipColorNoLens :: Dot -> Dot
+flipColorNoLens dot = dot { _col = invertColor (_col dot) }
+
+invertColor :: Color -> Color
+invertColor c = let (r, g, b, a) = rgbaOfColor c
+                in  makeColor (inv r) (inv g) (inv b) a
+
+inv :: Float -> Float
+inv x = 1.0 - x
 
 tick :: Float -> World -> World
 tick _ world = world
