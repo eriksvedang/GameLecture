@@ -5,4 +5,4 @@ import Armada
 import Shnake
 import Lentals
 
-main = lentals
+main = armada

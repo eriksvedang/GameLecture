@@ -95,11 +95,11 @@ tick dt world = world + dt * 50.0
 type Pos = (Float,Float)
 
 startWorld :: [Pos]
-startWorld = [(500,200), (450,100), (475,0), (400,-100), (420,-200),
-              (300,250), (250,150), (375,50), (200,-50), (320,-150)]
+startWorld = [(x,y) | x <- [400, 420.. 500], y <- [-250, -230..200]]
 
 drawShip :: Pos -> Picture
-drawShip (x,y) = translate x y $ color white $ circleSolid 10
+drawShip (x,y) = translate x y $ color white $ circleSolid radius
+    where radius = 10 * (sin (x * 0.01) + 2)
 
 draw :: [Pos] -> Picture
 draw world = pictures $ map drawShip world
