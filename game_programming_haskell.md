@@ -3,6 +3,10 @@
 
 ---
 
+## www.eriksvedang.com
+
+---
+
 # I have a dream
 
 ---
@@ -294,7 +298,9 @@ restart world = makeWorld (randg world)
 
 ---
 
-# Lots of boilerplate...
+# Game 3 - Lentals 
+## Lots of boilerplate...
+
 ```haskell
 data Dot = Dot {
     _pos :: Point,
