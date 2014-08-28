@@ -42,6 +42,8 @@ data Snake = Snake {
     alive :: Bool
 } deriving Show
 
+--data Snake = Either SnakeState
+
 makeWorld :: StdGen -> World
 makeWorld g = World {
     randg = g,
