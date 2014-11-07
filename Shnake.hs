@@ -6,6 +6,7 @@ import Graphics.Gloss.Data.ViewPort
 import System.Random
 import Control.Monad.State
 
+window :: Display
 window = InWindow "Shnake" (400, 400) (10, 10)
 
 -- | width and height of a tile, in pixels
@@ -68,6 +69,7 @@ draw world = applyViewPortToPicture viewPort $ pictures [cherryPic, snakePic]
           snakePic  = drawSnake (snake world)
           worldTime = time world
 
+viewPort :: ViewPort
 viewPort = ViewPort (-180, -180) 0 1.0
 
 drawSnake :: Snake -> Picture
@@ -113,7 +115,7 @@ move s = s { body = body', moveTimer = 0.0 }
           (oldHeadX, oldHeadY) = head (body s)
 
 dirToIntVector :: Dir -> (Int,Int)
-dirToIntVector dir = case dir of
+dirToIntVector d = case d of
     N -> (0, 1)
     E -> (1, 0)
     S -> (0, -1)
@@ -188,6 +190,7 @@ controlDir key s =
                         KeyRight -> E
                         KeyDown -> S
                         KeyLeft -> W
+                        _ -> currentDir
     in if desiredDir == opposite then currentDir else desiredDir
 
 opposites :: [(Dir, Dir)]
