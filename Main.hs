@@ -6,4 +6,4 @@ import Shnake
 import Lentals
 
 main :: IO ()
-main = armada
+main = blob
